@@ -21,7 +21,6 @@
     "glob": "^7.1.2",
     "log-symbols": "^2.2.0",
     "ora": "^2.1.0",
-    "typescript": "^2.8.3",
-    "ultrascript": "git+ssh://git@github.com:ultrain-os/assemblyscript.git"
+    "typescript": "^2.8.3"
   }
 }

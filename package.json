@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "javascript"
+    "blockchanin javascript"
   ],
   "bin": {
     "robin": "bin/robin.js"
@@ -18,9 +18,12 @@
     "chalk": "^2.4.1",
     "commander": "^2.16.0",
     "download-git-repo": "^1.0.2",
+    "fs-extra": "^6.0.1",
     "glob": "^7.1.2",
     "log-symbols": "^2.2.0",
     "ora": "^2.1.0",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "ultrascript": "git+ssh://git@github.com:ultrain-os/assemblyscript.git",
+    "yarn": "1.7.0"
   }
 }

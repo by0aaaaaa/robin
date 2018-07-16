@@ -1,12 +1,10 @@
-robin cli
+#robin cli
 
-#INSTALL
-git clone https://github.com/ultrain-os/robin.git
+## INSTALL
+1.g it clone https://github.com/ultrain-os/robin.git
+2.cd robin
+3.npm install
+4.npm link
 
-cd robin
-
-npm install
-
-npm link
-
-robin init
+## HOW TO USE robin cli
+1.robin -h

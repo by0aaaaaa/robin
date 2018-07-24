@@ -23,7 +23,7 @@ try{
         await downloadSync('ultrain-os/robin-template','.');
 
         // download lint
-        await downloadSync('ultrain-os/robin-lint','lint');
+        // await downloadSync('ultrain-os/robin-lint','lint');
 
         console.log(symbols.success, chalk.green('Init project success.'));
 

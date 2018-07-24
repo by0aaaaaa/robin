@@ -29,10 +29,10 @@ if(!fs.existsSync(buildDir)){
     console.log(symbols.success,'makedir build');
 }
 
-contracts.forEach(function(contract){
-    const contractName = path.parse(contract).name;
+for(let i in contracts){
+    const contractName = path.parse(contracts[i]).name;
     const cmdArgs = [
-        contract,
+        contracts[i],
         '-b',
         `build/${contractName}.wasm`,
         '-g',
@@ -43,12 +43,19 @@ contracts.forEach(function(contract){
         '--validate',
         '--optimize',
         '--noDebug'
-    ]
+    ];
+    
     const rs = spawnSync('usc',cmdArgs,{cwd:process.cwd()});
+    if(rs.stderr && rs.stderr != ''){
+        console.log(symbols.error,chalk.red(rs.stderr));
+        return false;
+    }
+
     if(rs.error){
         console.log(symbols.error,chalk.red(rs.error));
-        return;
+        return false;
     }
-})
+}
+
 console.log(symbols.success,'build success');
 

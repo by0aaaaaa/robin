@@ -3,9 +3,10 @@
 const chalk = require('chalk');
 const program = require('commander');
 const glob = require('glob');
-const download = require('download-git-repo');
+// const download = require('download-git-repo');
 const symbols = require('log-symbols');
 const { spawn } = require('child_process');
+const { downloadSync } = require('../lib/utils');
 
 program.parse(process.argv);
 
@@ -15,33 +16,38 @@ if(list.length){
     return;
 }
 
-// download template from git
-console.log(symbols.info,chalk.blue('Download...'));
+try{
+    (async ()=>{
+        // download template from git
+        console.log(symbols.info,chalk.blue('Download...'));
+        await downloadSync('ultrain-os/robin-template','.');
 
-download('ultrain-os/robin-template','.',{clone: true}, (err) => {
-    if(err){
-        console.log(symbols.error,chalk.red(err));
-        return;
-    }
-    console.log(symbols.success, chalk.green('init project success.'));
+        // download lint
+        await downloadSync('ultrain-os/robin-lint','lint');
 
-    // install dependencies for project.
-    console.log(symbols.info,chalk.blue('Install dependencies...'));
-    const yarn = spawn('yarn',{cwd:process.cwd()});
+        console.log(symbols.success, chalk.green('Init project success.'));
 
-    yarn.stdout.on('data',(data)=>{
-        console.log(symbols.info,data.toString('utf8'));
-    })
+        // install dependencies for project.
+        console.log(symbols.info,chalk.blue('Install dependencies...'));
+        const yarn = spawn('yarn',{cwd:process.cwd()});
 
-    yarn.stderr.on('data',(data)=>{
-        console.log(symbols.warning,chalk.yellow(data.toString('utf8')));
-    })
+        yarn.stdout.on('data',(data)=>{
+            console.log(symbols.info,data.toString('utf8'));
+        })
 
-    yarn.on('error',(err)=>{
-        console.log(symbols.error,chalk.red(err));
-    })
+        yarn.stderr.on('data',(data)=>{
+            console.log(symbols.warning,chalk.yellow(data.toString('utf8')));
+        })
 
-    yarn.on('close',(code)=>{
-        console.log(symbols.success, chalk.green('install dependencies success.'));
-    })
-})
+        yarn.on('error',(err)=>{
+            console.log(symbols.error,chalk.red(err));
+        })
+
+        yarn.on('close',(code)=>{
+            console.log(symbols.success, chalk.green('install dependencies success.'));
+        })
+    })();
+}catch(e){
+    console.log(symbols.error, chalk.red(e));
+    return;
+}

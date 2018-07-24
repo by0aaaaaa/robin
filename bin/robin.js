@@ -8,10 +8,13 @@ program
     .command('init','init your robin project.');
 
 program
-    .command('clean','clean build file.');
+    .command('build','build project.');
 
 program
-    .command('build','build project.');
+    .command('deploy','deploy smart contract.');
+
+program
+    .command('lint','lint project.');
 
 program.parse(process.argv);
 

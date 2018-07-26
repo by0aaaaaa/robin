@@ -42,7 +42,8 @@ for(let i in contracts){
         `build/${contractName}.wast`,
         '--validate',
         '--optimize',
-        '--noDebug'
+        '--noDebug',
+        '-l'
     ];
     
     const rs = spawnSync('usc',cmdArgs,{cwd:process.cwd()});

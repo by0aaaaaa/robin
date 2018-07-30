@@ -19,7 +19,7 @@ if(list.length){
 try{
     (async ()=>{
         // download template from git
-        console.log(symbols.info,chalk.blue('Download...'));
+        console.log(symbols.info,chalk.blue('Download Contract Template...'));
         await downloadSync('ultrain-os/robin-template','.');
 
         // download lint

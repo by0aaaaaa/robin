@@ -1,10 +1,11 @@
 {
-  "name": "robin",
-  "version": "1.0.0",
-  "description": "ultrain cli",
+  "name": "robin-cli",
+  "version": "1.0.4",
+  "description": "cli",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npm install -g yarn"
   },
   "keywords": [
     "blockchanin javascript"
@@ -12,7 +13,7 @@
   "bin": {
     "robin": "bin/robin.js"
   },
-  "author": "ultrain",
+  "author": "robin001 <liufeifei@ultrain.io>",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.1",
@@ -21,9 +22,6 @@
     "fs-extra": "^6.0.1",
     "glob": "^7.1.2",
     "log-symbols": "^2.2.0",
-    "ora": "^2.1.0",
-    "typescript": "^2.8.3",
-    "ultrascript": "git+ssh://git@github.com:ultrain-os/assemblyscript.git",
-    "yarn": "1.7.0"
+    "ora": "^2.1.0"
   }
 }

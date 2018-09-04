@@ -6,12 +6,15 @@ const { spawn } = require('child_process');
 
 program.parse(process.argv);
 const cmdArgs = [
+  'prettier',
+  `contract/**/*.ts`,
+  '--write',
   'tslint',
   '--fix',
   '--project',
   '.'
 ];
-const lint = spawn('npm', ['run', cmdArgs], { cwd: process.cwd() });
+const lint = spawn('npm', ['run', 'fix:tslint'], { cwd: process.cwd() });
 lint.stdout.on('data', (data) => {
   console.log(data.toString('utf8'));
 });

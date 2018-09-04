@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "npm install -g yarn && yarn global add ultrascript && yarn global add prettier && yarn global add tslint@5.4.3 && yarn global add tslint-config-prettier"
+    "preinstall": "npm install -g yarn && yarn global add ultrascript"
   },
   "keywords": [
     "blockchanin smart contract javascript"

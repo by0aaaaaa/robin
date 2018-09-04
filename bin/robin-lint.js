@@ -6,9 +6,6 @@ const { spawn } = require('child_process');
 
 program.parse(process.argv);
 const cmdArgs = [
-  'prettier',
-  '\"contract/**/*.ts\"',
-  '--write',
   'tslint',
   '--fix',
   '--project',

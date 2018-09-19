@@ -14,7 +14,7 @@ const cmdArgs = [
   '--project',
   '.'
 ];
-const lint = spawn('npm', ['run', 'fix:tslint'], { cwd: process.cwd() });
+const lint = spawn('npm', ['run', cmdArgs], { cwd: process.cwd() });
 lint.stdout.on('data', (data) => {
   console.log(data.toString('utf8'));
 });

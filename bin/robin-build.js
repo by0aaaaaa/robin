@@ -15,18 +15,18 @@ if(!contracts.length){
     return;
 }
 
-// clean build
+// clean token
 const buildDir = path.join(process.cwd(),'build');
 if(fs.existsSync(buildDir)){
     fs.emptyDirSync(buildDir);
     fs.rmdirSync(buildDir);
-    console.log(symbols.success,'trash build');
+    console.log(symbols.success,'trash token');
 }
 
-// create build
+// create token
 if(!fs.existsSync(buildDir)){
     fs.mkdirSync(buildDir);
-    console.log(symbols.success,'makedir build');
+    console.log(symbols.success,'makedir token');
 }
 
 for(let i in contracts){
@@ -47,10 +47,10 @@ for(let i in contracts){
     ];
     
     const rs = spawnSync('usc',cmdArgs,{cwd:process.cwd()});
-    if(rs.stderr && rs.stderr != ''){
+    if(rs.stderr && rs.stderr !== ''){
         let isWarning = false;
         console.log(`warning:${rs.stderr.indexOf('WARNING')}`);
-        if(rs.stderr.indexOf('WARNING') != -1)
+        if(rs.stderr.indexOf('WARNING') !== -1)
             isWarning = true;
         
         if(!isWarning)
@@ -65,5 +65,5 @@ for(let i in contracts){
     }
 }
 
-console.log(symbols.success,'build success');
+console.log(symbols.success,'token success');
 

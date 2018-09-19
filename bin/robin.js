@@ -8,7 +8,7 @@ program
     .command('init','init your robin project.');
 
 program
-    .command('build','build project.');
+    .command('build','token project.');
 
 program
     .command('deploy','deploy smart contract.');
@@ -18,6 +18,6 @@ program
 
 program.parse(process.argv);
 
-if(program.args.length==0){
+if(program.args.length===0){
     program.help();
 }

@@ -29,6 +29,8 @@ if (!fs.existsSync(buildDir)) {
   console.log(symbols.success, 'makedir token');
 }
 
+process.env.PATH = `${process.cwd()}/node_modules/ultrascript/bin:${process.env.PATH}`;
+
 for (let i in contracts) {
   const contractName = path.parse(contracts[i]).name;
   const cmdArgs = [
@@ -46,9 +48,7 @@ for (let i in contracts) {
     '-l'
   ];
 
-  process.env.PATH = `${process.cwd()}/node_modules/ultrascript/bin:${process.env.PATH}`;
   const rs = spawnSync('asc', cmdArgs, { cwd: process.cwd(), env: process.env });
-  
   if (rs.stderr && rs.stderr !== '') {
     let isWarning = false;
     console.log(`warning:${rs.stderr.indexOf('WARNING')}`);

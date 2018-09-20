@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander');
 const pkg = require('../package.json');
+const commands = ['init','build','deploy','lint'];
 
 program
     .version(pkg.version,'-v,--version')
@@ -18,6 +19,10 @@ program
 
 program.parse(process.argv);
 
-if(program.args.length===0){
+if(program.args.length === 0){
+    program.help();
+}
+
+if(!commands.includes(program.args[0])){
     program.help();
 }

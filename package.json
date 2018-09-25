@@ -1,6 +1,6 @@
 {
-  "name": "robin-cli",
-  "version": "0.0.7",
+  "name": "robin-framework",
+  "version": "0.0.1",
   "description": "cli",
   "main": "index.js",
   "keywords": [
@@ -9,7 +9,7 @@
   "bin": {
     "robin": "bin/robin.js"
   },
-  "author": "robin001 <liufeifei@ultrain.io>",
+  "author": "robin001 <ben.yasin80@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.1",

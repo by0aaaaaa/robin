@@ -25,7 +25,7 @@ try{
         // download lint
         // await downloadSync('ultrain-os/robin-lint','lint');
 
-        console.log(symbols.success, chalk.green('Init project success.'));
+        console.log(symbols.success, chalk.green('Init project successfully.'));
 
         // install dependencies for project.
         console.log(symbols.info,chalk.blue('Install dependencies...'));
@@ -44,7 +44,7 @@ try{
         })
 
         yarn.on('close',(code)=>{
-            console.log(symbols.success, chalk.green('install dependencies success.'));
+            console.log(symbols.success, chalk.green('install dependencies successfully.'));
         })
     })();
 }catch(e){

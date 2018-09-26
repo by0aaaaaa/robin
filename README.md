@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/1866848/46091197-e5fbf880-c1e4-11e8-9fea-45cc020cd312.png" width="40%" height="40%" />
+![Alt Text](https://user-images.githubusercontent.com/1866848/46092758-33c63000-c1e8-11e8-8d70-655c7358df89.png)
 
 # 智能合约开发框架-ROBIN
     ROBIN是用Javascript实现的脚手架工具,以Node package的形式发布在NPM.方便开发者开发/编译/调试/部署智能合约.

@@ -39,11 +39,9 @@ for (let i in contracts) {
     `build/${contractName}.wasm`,
     '-g',
     `build/${contractName}.abi`,
-    '-O',
     '-t',
     `build/${contractName}.wast`,
     '--validate',
-    '--optimize',
     '--noDebug',
     '-l'
   ];

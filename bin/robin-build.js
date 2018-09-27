@@ -49,9 +49,8 @@ for (let i in contracts) {
   ];
 
   const rs = spawnSync('asc', cmdArgs, { cwd: process.cwd(), env: process.env });
-  if (rs.stderr && rs.stderr !== '') {
+  if (rs.stderr && rs.stderr.length > 0) {
     let isWarning = false;
-    console.log(`warning:${rs.stderr.indexOf('WARNING')}`);
     if (rs.stderr.indexOf('WARNING') !== -1)
       isWarning = true;
 

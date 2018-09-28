@@ -2,11 +2,15 @@
 const program = require('commander');
 const pkg = require('../package.json');
 const updateNotifier = require('update-notifier');
-
-updateNotifier({pkg}).notify();
+const notifier = updateNotifier({
+  pkg,
+  updateCheckInterval: 1000 * 60 * 60 * 24 // 1 day
+});
+if (notifier.update) {
+  notifier.notify();
+}
 
 const commandList = ['init', 'build', 'deploy', 'lint', 'test'];
-
 program
   .version(pkg.version, '-v,--version')
   .usage('<command>')

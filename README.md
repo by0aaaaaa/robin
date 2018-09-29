@@ -1,66 +1,91 @@
-
-<img src="https://user-images.githubusercontent.com/1866848/46092758-33c63000-c1e8-11e8-8d70-655c7358df89.png" width="150" hegiht="300" align=center />
-
+<img src="https://user-images.githubusercontent.com/1866848/46092758-33c63000-c1e8-11e8-8d70-655c7358df89.png" width="250" hegiht="400" align=center />
 
 
-# 智能合约开发框架-ROBIN
-    ROBIN是用Javascript实现的脚手架工具,以Node package的形式发布在NPM.方便开发者开发/编译/调试/部署智能合约.
+## ROBIN OVERVIEW
 
-## 安装
-`npm install -g robin-cli`
+A world class development environment, testing framework and asset pipeline for blockchains using the ULTRAIN Chain, aiming to make life as a developer easier. With Robin, you get:
 
+* One-click contract compilation and development.
+* Automated contract testing for rapid development.
+* Friendly code Review and automated error fixing.
+* Lots of contract templates for reference.
+* Scriptable, extensible deployment & migrations framework.
+* Network management for deploying to any number of public & private networks.
+* Interactive console for direct contract communication.
+
+## INSTALLATION
+
+```
+npm install -g robin-framework
+```
 or
 
-`yarn add global robin-cli`
+```
+yarn global add robin-framework
+```
 
-> 本地Node.js版本大于等于7.6
+### Requirements
+NodeJS 8.0+.
 
-## 使用
-Command Line
+Windows, Linux or Mac OS X.
 
-`robin <Commands>`
+### CREATING A PROJECT
 
-Options:
-* -v,--version  output the version number
-* -h, --help    output usage information
-  
-Commands:
-* init
-    
-    根据robin-template生成合约模版工程
-    
-    > 在执行`robin init`之前需要创建一个空文件夹作为工程目录(`mkdir demo && cd demo`).  
-    > 初始化工程需要花一点时间,请耐心等待.
+To view all Robin commands, you need to run `robin` or `robin -h`.
 
-    工程基本结构
+To start a contract, you need create a new empty directory first, and then entry the directory:
+
+```
+mkdir testing
+cd testing
+```
+And then initialize a smart contract project.
+
+```
+robin init
+```
+
+Project structure:
 
     ```
-    |--build        // 编译目录
-    |--contract     // 合约目录
-    |--lint         // 语法检测
-    |--migrations   // 合约部署
-    |--config.js    // u3.js配置
+    |--build        // build target directory
+    |--contract     // contract source files directory
+    |--migrations   // migrations directory
+    |--templates    // templates directory
+    |--test         // test directory
+    |--config.js    // configuration
     ...
     ```
-* build
 
-    依赖Ultrascript,将TS格式的合约编译为WAST/WASM格式文件,最终编译文件保存在build目录中.
-* deploy
+## LINT CONTRACTS
+With the help of `robin-lint`, a customized `tslint` project, you will be find errors and warnings and then fix them quickly.
+Just entry into the root directory of your contract project and execute: 
+```
+robin lint
+```
 
-    `robin deply`集成u3.js的deploy功能,将合约部署上链.
-    合约部署文件在migrations目录下.
+## TEST CONTRACTS
 
-    migrate.js
-    ```javascript
-    const {U3} = require('u3.js');
-    const config = require('../config');
-    const u3 = U3.createU3(config);
-    u3.deploy('build/MyContract','ultrainio');
-    ```
-    根据实际情况修改config.js(node节点相关信息).
+Referring to `*.spec.js` files in the test directory, write your own test file and try to cover all the case about the contract. Robin provides you lots of tool classes such as `mocha`, `chai`, `u3.js` and `u3-utils` for writing test case, especially handling async test.
 
-* lint
+Just entry into the root directory of your contract project and execute: 
+```
+robin test
+```
 
-    合约语法检测
+## COMPILE CONTRACTS
 
+Depend on the compiling tool `ultrascript`，smart contract will be compiled to WebAsssembly target files: *.abi, *.wast, *.wasm.
+Just entry into the root directory of your contract project and execute: 
+```
+robin build
+```
+
+## DEPLOY CONTRACTS
+
+Updating and configuring the `config.js` and `migrate.js` files, make sure you have make a successful connection with the ULTRAIN chain node. The nodultrain can be a integrated envirnment if you use **`longclaw`** in docker or maybe an customized node by yourself.
+Just entry into the root directory of your contract project and execute: 
+```
+robin deploy
+```
 

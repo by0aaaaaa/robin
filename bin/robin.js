@@ -7,8 +7,17 @@ const { downloadSync } = require('../lib/utils');
 const program = require('commander');
 const pkg = require('../package.json');
 const fs = require('fs');
-const commandList = ['init', 'build', 'deploy', 'lint'];
 
+const updateNotifier = require('update-notifier');
+const notifier = updateNotifier({
+  pkg,
+  updateCheckInterval: 1000 * 60 * 60 * 24 // 1 day
+});
+if (notifier.update) {
+  notifier.notify();
+}
+
+const commandList = ['init', 'build', 'deploy', 'lint', 'test'];
 program
     .version(pkg.version, '-v,--version');
 
@@ -43,7 +52,7 @@ program
 
             // install dependencies for project.
             console.log(symbols.info, chalk.blue('Install dependencies...'));
-            const yarn = spawn('yarn', { cwd: process.cwd() });
+            const yarn = spawn('npm',['install'], { cwd: process.cwd() });
 
             yarn.stdout.on('data', (data) => {
                 console.log(symbols.info, data.toString('utf8'));
@@ -78,7 +87,7 @@ program
 program.parse(process.argv);
 
 if (!commandList.includes(program.args[0])) {
-    // return program.help();
+    return program.help();
 }
 
 if (program.args.length === 0) {

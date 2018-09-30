@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 const program = require('commander');
 const pkg = require('../package.json');
-var confirm = require('inquirer-confirm');
-const init = require('./robin-init');
+const { init } = require('./robin-init');
+const confirm = require('inquirer-confirm');
+
 const updateNotifier = require('update-notifier');
 const notifier = updateNotifier({
   pkg,
@@ -28,13 +29,24 @@ program
   .description('Initialize a robin project. Specify contract\'s name with --name optionally.')
   .option('--name [contractName]', 'set contract name.')
   .action(option => {
-    confirm('are you ok?')
-      .then(function confirmed() {
-        console.log('you are ok');
-      }, function cancelled() {
-        console.log('sorry to hear that');
-      });
-    init(option);
+    //no option input
+    if (option.hasOwnProperty('commands')) {
+      return init(option);
+    }
+    //option not start with '--name '
+    else if (option.indexOf('--name ', 0) === -1) {
+      var name = option.split(' ')[0];
+      confirm('Do you mean the contract name is ' + name + '?')
+        .then(function confirmed() {
+          option.name = name;
+          return init(option);
+        }, function cancelled() {
+          option.name = 'MyContract';
+          return init(option);
+        });
+    } else {
+      return init(option);
+    }
   });
 
 program

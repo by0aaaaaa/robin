@@ -7,6 +7,11 @@ const fs = require('fs');
 
 exports.init = async function(option){
   let contractName;
+
+  if (typeof option === 'string') {
+    contractName = option;
+  }
+
   if (typeof option.name === 'string') {
     contractName = option.name;
   }

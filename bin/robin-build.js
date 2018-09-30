@@ -11,7 +11,7 @@ program.parse(process.argv);
 
 const contracts = glob.sync('contract/*.ts');
 if (!contracts.length) {
-  console.log(symbols.error, chalk.red('can not found contract source files.'));
+  console.log(symbols.error, chalk.red('Can not found contract source files.'));
   return;
 }
 
@@ -20,13 +20,13 @@ const buildDir = path.join(process.cwd(), 'build');
 if (fs.existsSync(buildDir)) {
   fs.emptyDirSync(buildDir);
   fs.rmdirSync(buildDir);
-  console.log(symbols.success, 'trash built target');
+  console.log(symbols.success, 'Trash built target files');
 }
 
 // create directory
 if (!fs.existsSync(buildDir)) {
   fs.mkdirSync(buildDir);
-  console.log(symbols.success, 'make build directory');
+  console.log(symbols.success, 'Make build directory');
 }
 
 process.env.PATH = `${process.cwd()}/node_modules/ultrascript/bin:${process.env.PATH}`;
@@ -64,5 +64,5 @@ for (let i in contracts) {
   }
 }
 
-console.log(symbols.success, 'build assembly target successfully');
+console.log(symbols.success, 'Build assembly target successfully');
 

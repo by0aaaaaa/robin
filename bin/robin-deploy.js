@@ -12,7 +12,7 @@ program.parse(process.argv);
 const migrate = path.join(process.cwd(),'migrations/migrate.js');
 
 if(!fs.existsSync(migrate)){
-    console.log(symbols.error,chalk.red(`can not found ${migrate}`));
+    console.log(symbols.error,chalk.red(`Can not found ${migrate}`));
     return;
 }
 

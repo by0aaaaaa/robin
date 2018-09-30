@@ -3,40 +3,57 @@ const glob = require('glob');
 const symbols = require('log-symbols');
 const { spawn } = require('child_process');
 const { downloadSync } = require('../lib/utils');
+const fs = require('fs');
 
-exports.init = async function(name){
-    const list = glob.sync('*');
-    if(list.length){
-        console.log(chalk.red('`robin init` must be executed in an empty folder.'));
-        return;
+exports.init = async function(option){
+  let contractName;
+  if (typeof option.name === 'string') {
+    contractName = option.name;
+  }
+
+  const list = glob.sync('*');
+  if (list.length) {
+    console.log(chalk.red('`robin init` must be executed in an empty folder.'));
+    return;
+  }
+
+  // download template from git
+  console.log(symbols.info, chalk.blue('Download Contract Template...'));
+
+  downloadSync('ultrain-os/robin-template', '.').then(() => {
+    if (contractName) {
+      // rename contract's name
+      let clazz = fs.readFileSync('contract/MyContract.ts').toString();
+      fs.writeFileSync('contract/MyContract.ts', clazz.replace('MyContract', contractName));
+
+      // rename migrate.js
+      let migrate = fs.readFileSync('migrations/migrate.js').toString();
+      fs.writeFileSync('migrations/migrate.js', migrate.replace('MyContract', contractName));
+
+      // rename contract file's name
+      fs.renameSync('contract/MyContract.ts', `contract/${contractName}.ts`);
+      fs.renameSync('test/MyContract.spec.js', `test/${contractName}.spec.js`);
     }
-
-    // download template from git
-    console.log(symbols.info,chalk.blue('Download Contract Template...'));
-    await downloadSync('ultrain-os/robin-template','.');
-
-    // download lint
-    // await downloadSync('ultrain-os/robin-lint','lint');
-
-    console.log(symbols.success, chalk.green('Init project successfully.'));
+    console.log(symbols.success, chalk.green('Initialize project successfully.'));
 
     // install dependencies for project.
-    console.log(symbols.info,chalk.blue('Install dependencies...'));
-    const yarn = spawn('yarn',{cwd:process.cwd()});
+    console.log(symbols.info, chalk.blue('Install dependencies...'));
+    const yarn = spawn('npm', ['install'], { cwd: process.cwd() });
 
-    yarn.stdout.on('data',(data)=>{
-        console.log(symbols.info,data.toString('utf8'));
-    })
+    yarn.stdout.on('data', (data) => {
+      console.log(symbols.info, data.toString('utf8'));
+    });
 
-    yarn.stderr.on('data',(data)=>{
-        console.log(symbols.warning,chalk.yellow(data.toString('utf8')));
-    })
+    yarn.stderr.on('data', (data) => {
+      console.log(symbols.warning, chalk.yellow(data.toString('utf8')));
+    });
 
-    yarn.on('error',(err)=>{
-        console.log(symbols.error,chalk.red(err));
-    })
+    yarn.on('error', (err) => {
+      console.log(symbols.error, chalk.red(err));
+    });
 
-    yarn.on('close',(code)=>{
-        console.log(symbols.success, chalk.green('install dependencies successfully.'));
-    })
+    yarn.on('close', (code) => {
+      console.log(symbols.success, chalk.green('Install dependencies successfully.'));
+    });
+  });
 }

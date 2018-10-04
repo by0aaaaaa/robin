@@ -43,7 +43,8 @@ exports.init = async function(option){
 
     // install dependencies for project.
     console.log(symbols.info, chalk.blue('Install dependencies...'));
-    const yarn = spawn('npm', ['install'], { cwd: process.cwd() });
+    const yarn = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run',  { cwd: process.cwd() }]);
+    //const yarn = spawn('npm', ['install'], { cwd: process.cwd() });
 
     yarn.stdout.on('data', (data) => {
       console.log(symbols.info, data.toString('utf8'));

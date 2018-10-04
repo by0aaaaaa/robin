@@ -46,7 +46,7 @@ for (let i in contracts) {
     '-l'
   ];
 
-  const rs = spawnSync(/^win/.test(process.platform) ? 'asc.cmd' : 'asc', cmdArgs,  { cwd: process.cwd(), env: process.env });
+  const rs = spawnSync(/^win/.test(process.platform) ? 'asc.cmd' : 'asc', cmdArgs,  { shell: true, cwd: process.cwd(), env: process.env });
   if (rs.stderr && rs.stderr.length > 0) {
     let isWarning = false;
     if (rs.stderr.indexOf('WARNING') !== -1)

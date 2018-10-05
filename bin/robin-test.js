@@ -11,12 +11,12 @@ const cmdArgs = [
 
 process.env.PATH = `${process.cwd()}/node_modules/mocha/bin:${process.env.PATH}`;
 
-const lint = spawn('mocha', cmdArgs, { cwd: process.cwd(), env: process.env });
-lint.stdout.on('data', (data) => {
+const test = spawn(/^win/.test(process.platform) ? 'mocha.cmd' : 'mocha', cmdArgs,  { cwd: process.cwd(), env: process.env });
+test.stdout.on('data', (data) => {
   console.log(data.toString('utf8'));
 });
 
-lint.stderr.on('data', (data) => {
+test.stderr.on('data', (data) => {
   if (data.indexOf('no-unused-variable is deprecated') !== -1) {
     console.log(symbols.warning, chalk.yellow(data.toString('utf8')));
   } else {
@@ -24,6 +24,6 @@ lint.stderr.on('data', (data) => {
   }
 });
 
-lint.on('close', (code) => {
+test.on('close', (code) => {
   // console.log(`lint `);
 });

@@ -16,18 +16,13 @@ A world class development environment, testing framework and asset pipeline for 
 ## INSTALLATION
 
 ```
-npm install -g robin-framework
-```
-or
-
-```
-yarn global add robin-framework
+sudo npm install -g robin-framework
 ```
 
 ### Requirements
 NodeJS 8.0+.
 
-Windows, Linux or Mac OS X.
+Linux or Mac OS X.
 
 ### CREATING A PROJECT
 

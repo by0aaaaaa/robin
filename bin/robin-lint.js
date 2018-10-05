@@ -14,7 +14,8 @@ const cmdArgs = [
 
 process.env.PATH = `${process.cwd()}/node_modules/tslint/bin:${process.env.PATH}`;
 
-const lint = spawn(/^win/.test(process.platform) ? 'tslint.cmd' : 'tslint', cmdArgs,  { cwd: process.cwd(), env: process.env });
+const lint = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'tslint'], { cwd: process.cwd() });
+//const lint = spawn(/^win/.test(process.platform) ? 'tslint' : 'tslint', cmdArgs,  { cwd: process.cwd(), env: process.env });
 lint.stdout.on('data', (data) => {
   console.log(data.toString('utf8'));
 });

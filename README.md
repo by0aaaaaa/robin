@@ -1,7 +1,7 @@
-<img src="https://user-images.githubusercontent.com/1866848/46092758-33c63000-c1e8-11e8-8d70-655c7358df89.png" width="250" hegiht="400" align=center />
+<img src="https://user-images.githubusercontent.com/1866848/46092758-33c63000-c1e8-11e8-8d70-655c7358df89.png" width="200" hegiht="300" align=center />
 
 
-## ROBIN OVERVIEW
+## OVERVIEW
 
 A world class development environment, testing framework and asset pipeline for blockchains using the ULTRAIN Chain, aiming to make life as a developer easier. With Robin, you get:
 

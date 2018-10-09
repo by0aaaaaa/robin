@@ -43,11 +43,11 @@ robin init
 Project structure:
 
     ```
-    |--build        // build target directory
-    |--contract     // contract source files directory
-    |--migrations   // migrations directory
-    |--templates    // templates directory
-    |--test         // test directory
+    |--build        // built WebAssembly targets
+    |--contract     // contract source files
+    |--migrations   // assign built files location and account who will deploy the contract
+    |--templates    // some contract templates that will guide you
+    |--test         // test files 
     |--config.js    // configuration
     ...
     ```
@@ -57,15 +57,6 @@ With the help of `robin-lint`, a customized `tslint` project, you will be find e
 Just entry into the root directory of your contract project and execute: 
 ```
 robin lint
-```
-
-## TEST CONTRACTS
-
-Referring to `*.spec.js` files in the test directory, write your own test file and try to cover all the case about the contract. Robin provides you lots of tool classes such as `mocha`, `chai`, `u3.js` and `u3-utils` for writing test case, especially handling async test.
-
-Just entry into the root directory of your contract project and execute: 
-```
-robin test
 ```
 
 ## COMPILE CONTRACTS
@@ -82,5 +73,14 @@ Updating and configuring the `config.js` and `migrate.js` files, make sure you h
 Just entry into the root directory of your contract project and execute: 
 ```
 robin deploy
+```
+
+## TEST CONTRACTS
+
+Referring to `*.spec.js` files in the test directory, write your own test file and try to cover all the case about the contract. Robin provides you lots of tool classes such as `mocha`, `chai`, `u3.js` and `u3-utils` for writing test case, especially handling async test.
+
+Just entry into the root directory of your contract project and execute: 
+```
+robin test
 ```
 

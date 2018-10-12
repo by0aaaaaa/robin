@@ -22,7 +22,7 @@ sudo npm install -g robin-framework
 ### Requirements
 NodeJS 8.0+.
 
-Linux or Mac OS X.
+Linux、MacOSX、Windows
 
 ### CREATING A PROJECT
 

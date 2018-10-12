@@ -1,6 +1,6 @@
 {
   "name": "robin-framework",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "cli",
   "main": "index.js",
   "keywords": [

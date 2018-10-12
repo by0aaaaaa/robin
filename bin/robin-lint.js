@@ -2,7 +2,7 @@
 const program = require('commander');
 const chalk = require('chalk');
 const symbols = require('log-symbols');
-const { spawn } = require('child_process');
+const spawn = require('cross-spawn');
 
 program.parse(process.argv);
 const cmdArgs = [
@@ -12,10 +12,9 @@ const cmdArgs = [
   '.'
 ];
 
-process.env.PATH = `${process.cwd()}/node_modules/tslint/bin:${process.env.PATH}`;
+process.env.PATH = `${process.cwd()}/node_modules/tslint/bin${process.platform === 'win32' ? ';' : ':'}${process.env.PATH}`;
 
-//const lint = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'tslint'], { cwd: process.cwd() });
-const lint = spawn(process.execPath, 'tslint', cmdArgs,  { cwd: process.cwd(), env: process.env });
+const lint = spawn('tslint', cmdArgs,  { cwd: process.cwd(), env: process.env });
 lint.stdout.on('data', (data) => {
   console.log(data.toString('utf8'));
 });

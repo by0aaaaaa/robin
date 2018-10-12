@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const glob = require('glob');
 const symbols = require('log-symbols');
-const { spawn } = require('child_process');
+const spawn= require('cross-spawn');
 const { downloadSync } = require('../lib/utils');
 const fs = require('fs');
 
@@ -43,7 +43,9 @@ exports.init = async function(option){
 
     // install dependencies for project.
     console.log(symbols.info, chalk.blue('Install dependencies...'));
-    const yarn = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['install'], { cwd: process.cwd() });
+    const yarn = spawn('npm', ['install'], { 
+      cwd: process.cwd()
+    });
 
     yarn.stdout.on('data', (data) => {
       console.log(symbols.info, data.toString('utf8'));
@@ -54,11 +56,15 @@ exports.init = async function(option){
     });
 
     yarn.on('error', (err) => {
-      console.log(symbols.error, chalk.red(err));
+      console.log(symbols.error, chalk.red(err.toString('utf8')));
     });
 
     yarn.on('close', (code) => {
-      console.log(symbols.success, chalk.green('Install dependencies successfully.'));
+      if(code === 0){
+        console.log(symbols.success, chalk.green('Install dependencies successfully.'));
+      }else{
+        console.log(symbols.error, chalk.green('Install dependencies fail.'));
+      }
     });
   });
 }

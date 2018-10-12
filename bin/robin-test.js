@@ -2,16 +2,16 @@
 const program = require('commander');
 const chalk = require('chalk');
 const symbols = require('log-symbols');
-const { spawn } = require('child_process');
+const spawn = require('cross-spawn');
 
 program.parse(process.argv);
 const cmdArgs = [
   'test/*.spec.js'
 ];
 
-process.env.PATH = `${process.cwd()}/node_modules/mocha/bin:${process.env.PATH}`;
+process.env.PATH = `${process.cwd()}/node_modules/mocha/bin${process.platform === 'win32' ? ';' : ':'}${process.env.PATH}`;
 
-const test = spawn(/^win/.test(process.platform) ? 'mocha.cmd' : 'mocha', cmdArgs,  { cwd: process.cwd(), env: process.env });
+const test = spawn('mocha', cmdArgs,  { cwd: process.cwd(), env: process.env });
 test.stdout.on('data', (data) => {
   console.log(data.toString('utf8'));
 });

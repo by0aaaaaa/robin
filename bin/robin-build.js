@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const symbols = require('log-symbols');
 const fs = require('fs-extra');
 const path = require('path');
-const { spawnSync } = require('child_process');
+const spawn = require('cross-spawn');
 
 program.parse(process.argv);
 
@@ -28,9 +28,7 @@ if (!fs.existsSync(buildDir)) {
   fs.mkdirSync(buildDir);
   console.log(symbols.success, 'Make build directory');
 }
-
-process.env.PATH = `${process.cwd()}/node_modules/ultrascript/bin:${process.env.PATH}`;
-
+process.env.PATH = `${process.env.PATH}${process.platform === 'win32' ? ';' : ':'}${process.cwd()}/node_modules/ultrascript/bin`;
 for (let i in contracts) {
   const contractName = path.parse(contracts[i]).name;
   const cmdArgs = [
@@ -46,7 +44,7 @@ for (let i in contracts) {
     '-l'
   ];
 
-  const rs = spawnSync(/^win/.test(process.platform) ? 'usc.cmd' : 'asc', cmdArgs,  { shell: true, cwd: process.cwd(), env: process.env });
+  const rs = spawn.sync('asc', cmdArgs,  { stdio:'inherit', cwd: process.cwd(), env: process.env });
   if (rs.stderr && rs.stderr.length > 0) {
     let isWarning = false;
     if (rs.stderr.indexOf('WARNING') !== -1)

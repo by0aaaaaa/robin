@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 const symbols = require('log-symbols');
-const { spawn } = require('child_process');
+const spawn = require('cross-spawn');
 
 program.parse(process.argv);
 

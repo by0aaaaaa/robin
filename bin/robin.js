@@ -19,33 +19,29 @@ program
 program.on('--help', function() {
   console.log('');
   console.log('Usages:');
-  console.log('  $ robin init --name MyContract');
+  console.log('  $ robin init -c MyContract');
+  console.log('  $ robin init --contract MyContract');
   console.log('');
   console.log('See more at http://developer.ultrain.io/tutorial/robin_tutorial');
 });
 
 program
   .command('init')
-  .description('Initialize a robin project. Specify contract\'s name with --name optionally.')
-  .option('--name [contractName]', 'set contract name.')
+  .description('Initialize a robin project. Specify contract\'s name with -c or --contract optionally.')
+  .option('-c, --contract [contractName]', 'set contract name.')
+  .option('--dev', "using development model")
   .action(option => {
     //no option input
-    if (option.hasOwnProperty('commands')) {
+    if (!option.contract) {
       return init(option);
-    }
-    //option not start with '--name '
-    else if (option.indexOf('--name ', 0) === -1) {
-      var name = option.split(' ')[0];
-      confirm('Do you mean the contract name is ' + name + '?')
+    } else {
+      confirm('Do you mean the contract name is ' + option.contract + '?')
         .then(function confirmed() {
-          option.name = name;
           return init(option);
         }, function cancelled() {
-          option.name = 'MyContract';
+          option.contract = 'MyContract';
           return init(option);
         });
-    } else {
-      return init(option);
     }
   });
 

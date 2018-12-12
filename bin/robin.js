@@ -27,9 +27,9 @@ program.on('--help', function() {
 
 program
   .command('init')
-  .description('Initialize a robin project. Specify contract\'s name with -c or --contract optionally.')
+  .description('Initialize a robin project. Specify contract\'s name with -c or --contract optionally.\n                Install dependecies from github with --dev optionally.')
   .option('-c, --contract [contractName]', 'set contract name.')
-  .option('--dev', "using development model")
+  .option('--dev', "set github dependencies")
   .action(option => {
     //no option input
     if (!option.contract) {

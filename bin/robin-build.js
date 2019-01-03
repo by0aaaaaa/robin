@@ -40,7 +40,6 @@ for (let i in contracts) {
     '-t',
     `build/${contractName}.wast`,
     '--validate',
-    '--noDebug',
     '-l'
   ];
 

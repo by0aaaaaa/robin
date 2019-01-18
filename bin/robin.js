@@ -2,7 +2,8 @@
 const program = require('commander');
 const pkg = require('../package.json');
 const { init } = require('./robin-init');
-const confirm = require('inquirer-confirm');
+// const confirm = require('inquirer-confirm');
+const inquirer = require('inquirer');
 
 const updateNotifier = require('update-notifier');
 const notifier = updateNotifier({
@@ -13,8 +14,7 @@ if (notifier.update) {
   notifier.notify();
 }
 
-program
-  .version(pkg.version, '-v,--version');
+program.version(pkg.version, '-v,--version');
 
 program.on('--help', function() {
   console.log('');
@@ -22,40 +22,60 @@ program.on('--help', function() {
   console.log('  $ robin init -c MyContract');
   console.log('  $ robin init --contract MyContract');
   console.log('');
-  console.log('See more at http://developer.ultrain.io/tutorial/robin_tutorial');
+  console.log(
+    'See more at http://developer.ultrain.io/tutorial/robin_tutorial'
+  );
 });
 
 program
   .command('init')
-  .description('Initialize a robin project. Specify contract\'s name with -c or --contract optionally.\n                Install dependecies from github with --dev optionally.')
+  .description(
+    "Initialize a robin project. Specify contract's name with -c or --contract optionally.\n                Install dependecies from github with --dev optionally."
+  )
   .option('-c, --contract [contractName]', 'set contract name.')
-  .option('--dev', "set github dependencies")
+  .option('--dev', 'set github dependencies')
   .action(option => {
     //no option input
     if (!option.contract) {
       return init(option);
     } else {
-      confirm('Do you mean the contract name is ' + option.contract + '?')
-        .then(function confirmed() {
-          return init(option);
-        }, function cancelled() {
-          option.contract = 'MyContract';
+      inquirer
+        .prompt([
+          {
+            type: 'confirm',
+            name: 'contractName',
+            message:
+              'Do you mean the contract name is ' + option.contract + '?',
+            default: true
+          }
+        ])
+        .then(rs => {
+          if (!rs.contractName) {
+            option.contract = 'MyContract';
+          }
           return init(option);
         });
+      // confirm().then(
+      //   function confirmed() {
+      //     return init(option);
+      //   },
+      //   function cancelled() {
+      //     option.contract = 'MyContract';
+      //     return init(option);
+      //   }
+      // );
     }
   });
 
-program
-  .command('build', 'Build contract to WebAssembly target files.');
+program.command('build', 'Build contract to WebAssembly target files.');
 
-program
-  .command('deploy', 'Deploy contract to a connected ultrain node');
+program.command('deploy', 'Deploy contract to a connected ultrain node');
 
-program
-  .command('lint', 'Check for syntax errors and fix them automatically.');
+program.command('lint', 'Check for syntax errors and fix them automatically.');
 
-program
-  .command('test', 'Run JavaScript test cases.');
+program.command('test', 'Run JavaScript test cases.');
+
+program.command('ui', 'Build webapp with selected template.');
 
 program.parse(process.argv);
 

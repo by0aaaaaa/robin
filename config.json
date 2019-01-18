@@ -1,0 +1,7 @@
+{
+  "ui": {
+    "vue-boilerplate": "ultrain-os/vue-boilerplate",
+    "react-boilerplate": "ultrain-os/react-boilerplate",
+    "react-native-boilerplate": "ultrain-os/react-native-boilerplate"
+  }
+}

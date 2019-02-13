@@ -37,6 +37,7 @@ program
   .action(option => {
     //no option input
     if (!option.contract) {
+      option.contract = 'MyContract';
       return init(option);
     } else {
       inquirer

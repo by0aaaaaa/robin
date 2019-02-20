@@ -1,5 +1,6 @@
 <img src="https://user-images.githubusercontent.com/1866848/53067086-a0322a80-350d-11e9-8bd9-ca1ecf12b090.png" width="200" hegiht="300" align=center />
 
+### 中文文档看[这里](https://github.com/ultrain-os/robin/blob/master/README_Zh.md)
 
 ## OVERVIEW
 

@@ -38,6 +38,10 @@ cd testing
 ```
 然后初始化一个项目。 使用 `-c` or `--contract` 来指定名称。此时，你有多个模板可以选择，默认的是纯合约项目，其余的是带界面的DAPP框架。
 
+```
+robin init
+```
+
 <img src="https://user-images.githubusercontent.com/1866848/53067481-492d5500-350f-11e9-8ffc-5276715e4192.png"/>
 
 

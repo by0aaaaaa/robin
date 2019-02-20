@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/1866848/46092758-33c63000-c1e8-11e8-8d70-655c7358df89.png" width="200" hegiht="300" align=center />
+<img src="https://user-images.githubusercontent.com/1866848/53067086-a0322a80-350d-11e9-8bd9-ca1ecf12b090.png" width="200" hegiht="300" align=center />
 
 
 ## OVERVIEW
@@ -20,6 +20,7 @@ sudo npm install -g robin-framework
 ```
 
 ### Requirements
+
 NodeJS 8.0+.
 
 Linux、MacOSX、Windows
@@ -34,13 +35,16 @@ To start a contract, you need create a new empty directory first, and then entry
 mkdir testing
 cd testing
 ```
-And then initialize a smart contract project.
+
+And then initialize a project. Using `-c` or `--contract` to specify a name. Now you have some templates to choose, the first one is contract only, and the others are DAPP framework with ui.
 
 ```
 robin init
 ```
 
-Project structure:
+<img src="https://user-images.githubusercontent.com/1866848/53067754-9a8a1400-3510-11e9-9f4b-3d0c2c9791d1.png"/>
+
+Contract Project structure:
 
     ```
     |--build        // built WebAssembly targets
@@ -53,8 +57,10 @@ Project structure:
     ```
 
 ## LINT CONTRACTS
+
 With the help of `robin-lint`, a customized `tslint` project, you will be find errors and warnings and then fix them quickly.
 Just entry into the root directory of your contract project and execute: 
+
 ```
 robin lint
 ```
@@ -63,6 +69,7 @@ robin lint
 
 Depend on the compiling tool `ultrascript`，smart contract will be compiled to WebAsssembly target files: *.abi, *.wast, *.wasm.
 Just entry into the root directory of your contract project and execute: 
+
 ```
 robin build
 ```
@@ -84,11 +91,12 @@ Just entry into the root directory of your contract project and execute:
 robin test
 ```
 
-## DAPP WITH UI
+## INTEGRATED WITH UI
 
-If you want to easily convert a contract project into a dapp project, you only need to use the ui subcommand, and you have three main front-end templates to choose from  `vue-boilerplate`、`react-boilerplate` and `react-native-boilerplate`.
+If you want to easily convert a contract project into a DAPP project, you only need to use the ui subcommand, and you have three main front-end templates to choose from  `vue-boilerplate`、`react-boilerplate` and `react-native-boilerplate`.
 
 Just entry into the root directory of your contract project and execute: 
+
 ```
 robin ui
 ```
